@@ -35,7 +35,6 @@ function fillArticle(httpRequest) {
     if (httpRequest.readyState === 4) {
         if (httpRequest.status === 200) {
             let content = JSON.parse(httpRequest.responseText);
-            console.log(content);
             document.getElementById('article-title').innerText = content.title;
             document.getElementById('article-content').innerHTML = content.content;
         } else {
