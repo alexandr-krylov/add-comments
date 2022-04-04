@@ -1,0 +1,28 @@
+services:
+  php81:
+    build:
+      context: ./docker/php
+      args:
+        - USER_ID
+        - GROUP_ID
+    volumes:
+      - ./src:/var/www
+    ports:
+      - "8000:8000"
+    networks:
+      - test-network
+  mysql:
+    image: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysqldata:/var/lib/mysql
+      - ./docker/mysql/init-db:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+    networks:
+      - test-network
+volumes:
+  mysqldata:
+networks:
+  test-network:
